@@ -1,7 +1,7 @@
 
 from udp_sock import ReceiverPort
 
-rp = ReceiverPort(port=4001)
+rp = ReceiverPort(port=4002)
 while True:
     data = rp.recv()
     for d in data:

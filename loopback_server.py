@@ -23,6 +23,7 @@ class Server:
             except socket.timeout:
                 pass
             if data:
+                data += bytearray([0x03])
                 self.sender.send(data)
                 data = None
 
