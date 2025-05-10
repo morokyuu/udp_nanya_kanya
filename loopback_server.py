@@ -24,10 +24,12 @@ class Server:
                 pass
             if data:
                 self.sender.send(data)
+                data = None
 
     def halt(self):
         self.alive = False
         if self.th1:
+            ## if recv is blocking control, thread cannot join().
             self.th1.join()
         if self.sender:
             self.sender.close()
@@ -38,7 +40,7 @@ class Server:
 
 s = Server()
 
-for _ in range(3):
+for _ in range(30):
     time.sleep(1)
     print("time")
 
