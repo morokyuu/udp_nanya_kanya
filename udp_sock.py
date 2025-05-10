@@ -9,6 +9,10 @@ class SenderPort:
     def send(self, cmd: bytearray):
         self.sock.sendto(cmd, (self.dest_ip, self.port))
 
+    def close(self):
+        print(f"close sender {self.port}")
+        self.sock.close()
+
 
 class ReceiverPort:
     def __init__(self, port: int, dest_ip: str = '0.0.0.0'):
@@ -21,6 +25,10 @@ class ReceiverPort:
     def recv(self, buffer_size: int = 1024) -> str:
         data, addr = self.sock.recvfrom(buffer_size)
         return data
+
+    def close(self):
+        print(f"close receiver {self.port}")
+        self.sock.close()
 
 if __name__ == '__main__':
     sender = SenderPort(port=4001, dest_ip="127.0.0.1")
