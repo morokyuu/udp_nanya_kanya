@@ -60,9 +60,11 @@ class Server:
 
 s = Server()
 
-for _ in range(60):
-    time.sleep(1)
-    print(".",end='')
+#for _ in range(60):
+#    time.sleep(1)
+#    print(".",end='')
+while True:
+    pass
 
-s.halt()
-print("out")
+#s.halt()
+#print("out")
