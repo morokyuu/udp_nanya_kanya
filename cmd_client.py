@@ -12,10 +12,11 @@ class Cmd_client:
         self.receiver = ReceiverPort(port=4002)
     
     def send(self,cmd):
-        self.alive = True
-        self.receiver.sock.settimeout(0.1)
+        timeout = [0.1,0.2,0.4,0.8]
 
-        for i in range(5):
+        for i in range(len(timeout)):
+            self.receiver.sock.settimeout(timeout[i])
+
             self.th1 = threading.Thread(target=self.receive_thread,args=(cmd,),daemon=True)
             self.th1.start()
 
@@ -25,7 +26,7 @@ class Cmd_client:
             self.th1.join()
 
             if self.data:
-                print("success")
+                print(f"success: received data = {self.data}")
                 break
         
 
@@ -35,12 +36,11 @@ class Cmd_client:
         try:
             self.data = self.receiver.recv()
         except socket.timeout:
-            print("err: timeout")
+            print("\033[31m err: timeout \033[0m")
 
         if self.data and (not self.data[0] == cmd[0]):
-            print(f"err: expected packet is cmd={cmd[0]}")
+            print(f"err: expected packet is cmd={cmd[0]} data = {self.data}")
             self.data = None
-        print(f"received data {self.data}")
 
 
 #    def halt(self):
