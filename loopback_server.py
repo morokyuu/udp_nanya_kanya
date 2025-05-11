@@ -3,6 +3,7 @@ from udp_sock import SenderPort
 import socket
 import threading
 import time
+import random
 
 
 
@@ -23,8 +24,9 @@ class Server:
             except socket.timeout:
                 pass
             if data:
-                data += bytearray([0x03])
-                self.sender.send(data)
+                d = list(data)
+                d[-1] += 1
+                self.sender.send(bytearray(d))
                 data = None
 
     def halt(self):
