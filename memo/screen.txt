@@ -1,0 +1,29 @@
+
+ref
+https://qiita.com/logiteca7/items/bb5ea4032c141a29e8ce
+
+これでセッション+windowがとりあえず一個つくられる。
+screen
+
+
+Ctrl+aでコマンド受付状態になる。
+
+Ctrl+a, c あたらしいウィンドウを作る
+Ctrl+a, Ctrl+d セッションをデタッチ
+Ctrl+a, w ウィンドウ一覧
+Ctrl+a, 0-9 ウィンドウを移動
+Ctrl+a, c あたらしいウィンドウを作る
+
+
+画面を分割するには
+Ctrl+a, S
+分割したあとその画面に移動して、ウィンドウを作成したらいい。
+
+screen -r (PID)
+attach
+
+screen kill (PID)
+session delete
+
+
+

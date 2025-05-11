@@ -16,6 +16,17 @@ class Server:
         self.th1 = threading.Thread(target=self.receive_thread,daemon=True)
         self.th1.start()
 
+    def _sendback(self,data):
+        ## sendback delay simulation
+        delay_sim = random.choice([0.001,0.005,0.04,0.08,0.15,0.7])
+        time.sleep(delay_sim)
+
+        ## increment last element of data
+        d = list(data)
+        d[-1] += 1
+
+        self.sender.send(bytearray(d))
+
     def receive_thread(self):
         data = None
         while self.alive:
@@ -24,9 +35,7 @@ class Server:
             except socket.timeout:
                 pass
             if data:
-                d = list(data)
-                d[-1] += 1
-                self.sender.send(bytearray(d))
+                self._sendback(data)
                 data = None
 
     def halt(self):

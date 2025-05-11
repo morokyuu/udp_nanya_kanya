@@ -1,0 +1,17 @@
+
+つかったコマンド
+capture for localhost
+sudo tcpdump -i lo -tttnl
+
+with file dump
+sudo tcpdump -i lo -tttnl -w dump.pcap
+
+
+
+よく使う組み合わせ
+https://qiita.com/ktamido/items/7da3c606cd0dc491cf10
+
+ref オプションのリスト
+https://www.tohoho-web.com/ex/tcpdump.html
+
+
