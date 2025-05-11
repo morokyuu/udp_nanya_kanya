@@ -4,7 +4,7 @@ import socket
 import threading
 import time
 import random
-
+from moji import color_text
 
 class Cmd_client:
     def __init__(self):
@@ -26,7 +26,7 @@ class Cmd_client:
             self.th1.join()
 
             if self.data:
-                print(f"success: received data = {self.data}")
+                print(color_text(f"success: received data = {self.data}","cyan"))
                 break
         
 
@@ -36,10 +36,10 @@ class Cmd_client:
         try:
             self.data = self.receiver.recv()
         except socket.timeout:
-            print("\033[31m err: timeout \033[0m")
+            print(color_text("err: timeout","red"))
 
         if self.data and (not self.data[0] == cmd[0]):
-            print(f"err: expected packet is cmd={cmd[0]} data = {self.data}")
+            print(color_text(f"err: expected packet is cmd={cmd[0]} data = {self.data}","red"))
             self.data = None
 
 
