@@ -21,11 +21,18 @@ class Server:
         delay_sim = random.choice([0.001,0.005,0.04,0.08,0.15,0.7])
         time.sleep(delay_sim)
 
-        ## increment last element of data
+        ## unpack bytearray 
         d = list(data)
+
+        ## accidentially cmd change
+        d[0] = random.choice([d[0]]*9 + [0x00]) # false will occer 10%
+        #d[0] = random.choice([d[0]]*1 + [0x00]*9) # false will occer 10%
+
+        ## increment last element of data
         d[-1] += 1
 
         self.sender.send(bytearray(d))
+        print(f'sendback data={d}')
 
     def receive_thread(self):
         data = None
@@ -35,6 +42,7 @@ class Server:
             except socket.timeout:
                 pass
             if data:
+                print(f'received data={data}')
                 self._sendback(data)
                 data = None
 

@@ -20,9 +20,12 @@ class Cmd_client:
             self.th1.start()
 
             self.sender.send(cmd)
+            print(f'send to {self.sender.port} cmd={cmd}')
 
             self.th1.join()
-            print(self.data)
+        
+        if self.data:
+            print("success")
 
 
     def receive_thread(self,cmd):
@@ -33,6 +36,7 @@ class Cmd_client:
             print("timeout")
 
         if self.data and (not self.data[0] == cmd[0]):
+            print(f"expected packet is cmd={cmd[0]}")
             self.data = None
 
 
