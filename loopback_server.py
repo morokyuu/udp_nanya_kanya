@@ -52,9 +52,9 @@ class Server:
 
 s = Server()
 
-for _ in range(30):
+for _ in range(60):
     time.sleep(1)
-    print("time")
+    print(".",end='')
 
 s.halt()
 print("out")
